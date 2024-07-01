@@ -1,17 +1,37 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title> palindrome checker</title>
+<head>
+    <title>Palindrome Checker</title>
+</head>
+<body>
+    <h1>Palindrome Checker</h1>
+    <input type="text" id="inputString" placeholder="Enter a string" oninput="checkPalindrome()">
+    <button onclick="checkPalindrome()">submit</button>
+    <p id="result"></p>
 
-    </head>
-    <body>
-        <script src="palindrome.js"></script>
-        <h1> Palindrome Checker</h1>
-        <form id="palindrome checker form">
-             <label for ="UserInput">enter a word:</label>
-             <input type = "text" id="userinput" placeholder="insert a string please">
-             <button type ="submit">submit</button>
-             <p id="result"></p>
-        </form>
-    </body>
+    <script>
+        function checkPalindrome() {
+            const inputString = document.getElementById('inputString').value; // the field for inputting the string to be checked
+            const resultElement = document.getElementById('result'); // displaying of the results
+
+            // Lowercase conversion and removal of non-alphabetic characters
+            const cleanedString = inputString.replace(/[^A-Za-z0-9]/g, '').toLowerCase(); 
+
+            let left = 0; // the beginning index of the string
+            let right = cleanedString.length - 1; // the ending index of the string
+
+            while (left < right) {
+                if (cleanedString[left] !== cleanedString[right]) {
+                    // checks if the left and the right values are not equal
+                    resultElement.textContent = `"${inputString}" is not a palindrome`; // the output of the palindrome checker
+                    return;
+                }
+                left++;
+                right--;
+            }
+
+            resultElement.textContent = `"${inputString}" is a palindrome`;
+        }
+    </script>
+</body>
 </html>
